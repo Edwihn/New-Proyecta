@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <title>Login - Proyecta</title>
+
+    <style>
+        .bg-navbar-gradient {
+            background: linear-gradient(to right, #000000 30%, #05701c 90%);
+        }
+
+        .bg-light-green {
+            background-color: #36d364;
+        }
+
+        .text-light-green {
+            color: #36d364;
+        }
+    </style>
+</head>
+
+<body class="h-screen bg-gray-50 flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-navbar-gradient shadow-md">
+        <div class="navbar px-6">
+            <div class="flex-1">
+                <div class="flex items-center gap-2">
+                    <div class="text-light-green font-bold text-2xl">PV</div>
+                    <span class="text-white text-lg font-semibold hidden md:block">
+                        Proyecta UTCH
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <main class="flex flex-1 items-center justify-center">
+
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <h1 class="text-3xl font-bold">Bienvenido</h1>
+                <p class="text-gray-500 mt-2">Inicia sesión para continuar</p>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-5">
+
+                <!-- Email -->
+                <div>
+                    <label class="label">
+                        <span class="label-text font-medium">Correo electrónico</span>
+                    </label>
+                    <input type="email" placeholder="ejemplo@correo.com"
+                        class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-green-500" />
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="label">
+                        <span class="label-text font-medium">Contraseña</span>
+                    </label>
+                    <input type="password" placeholder="********"
+                        class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-green-500" />
+                </div>
+
+                <!-- Remember + Forgot -->
+                <div class="flex justify-between items-center text-sm">
+                    <label class="cursor-pointer flex items-center gap-2">
+                        <input type="checkbox" class="checkbox checkbox-success checkbox-sm" />
+                        <span>Recordarme</span>
+                    </label>
+
+                    <a href="#" class="text-light-green hover:underline">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+
+                <!-- Button -->
+                <button type="submit"
+                    class="w-full bg-light-green hover:bg-green-500 text-white font-semibold py-2 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+                    Iniciar Sesión
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <div class="text-center mt-6 text-sm text-gray-500">
+                © 2026 Proyecta Vehicular
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
