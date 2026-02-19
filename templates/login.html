@@ -10,95 +10,287 @@
     <title>Login - Proyecta</title>
 
     <style>
+        :root {
+            --green-brand: #36d364;
+            --green-dark: #05701c;
+        }
+
         .bg-navbar-gradient {
-            background: linear-gradient(to right, #000000 30%, #05701c 90%);
+            background: linear-gradient(to right, #000000 30%, var(--green-dark) 90%);
         }
 
         .bg-light-green {
-            background-color: #36d364;
+            background-color: var(--green-brand);
         }
 
         .text-light-green {
-            color: #36d364;
+            color: var(--green-brand);
+        }
+
+        /* ===== LOGIN PAGE LAYOUT ===== */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Subtle background pattern */
+            background: linear-gradient(135deg, #f0fdf4 0%, #f9fafb 50%, #ecfdf5 100%);
+            padding: 2rem 1rem;
+        }
+
+        /* The card scales with the viewport */
+        .login-card {
+            width: 100%;
+            max-width: min(460px, 90vw);
+            background: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+            padding: clamp(1.75rem, 4vw, 2.5rem);
+        }
+
+        /* On very large screens cap the card a bit wider */
+        @media (min-width: 1536px) {
+            .login-card {
+                max-width: 520px;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .login-card {
+                max-width: 560px;
+                padding: 3rem;
+            }
+        }
+
+        /* Scale the heading */
+        .login-title {
+            font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .login-subtitle {
+            font-size: clamp(0.85rem, 1vw, 1rem);
+            color: #6b7280;
+            margin-top: 0.35rem;
+        }
+
+        /* Inputs */
+        .form-input {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 1.5px solid #d1d5db;
+            border-radius: 0.625rem;
+            font-size: clamp(0.85rem, 1vw, 1rem);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #f9fafb;
+        }
+
+        .form-input:focus {
+            border-color: var(--green-brand);
+            box-shadow: 0 0 0 3px rgba(54, 211, 100, 0.15);
+            background: white;
+        }
+
+        .form-label {
+            display: block;
+            font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.4rem;
+        }
+
+        /* Submit button */
+        .login-btn {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: var(--green-brand);
+            color: white;
+            font-weight: 700;
+            font-size: clamp(0.875rem, 1vw, 1rem);
+            border-radius: 0.75rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(54, 211, 100, 0.35);
+        }
+
+        .login-btn:hover {
+            background: #2bc257;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(54, 211, 100, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Checkbox */
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+            color: #4b5563;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+            color: var(--green-brand);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .forgot-link:hover {
+            opacity: 0.75;
+            text-decoration: underline;
+        }
+
+        /* Divider */
+        .form-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+        }
+
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .form-divider span {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            white-space: nowrap;
+        }
+
+        /* Navbar */
+        .navbar-inner {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 1280px) {
+            .navbar-inner {
+                padding: 0 3rem;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .navbar-inner {
+                padding: 0 6rem;
+            }
         }
     </style>
 </head>
 
-<body class="h-screen bg-gray-50 flex flex-col">
+<body>
 
-    <!-- Navbar -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="bg-navbar-gradient shadow-md">
-        <div class="navbar px-6">
-            <div class="flex-1">
-                <div class="flex items-center gap-2">
-                    <img src="../static/logo_proyecta.png" alt="UTCH" class="h-6 w-8 mt-1 mr-2 cursor-pointer">
-                    <span class="text-white text-lg font-semibold hidden md:block">
-                        Proyecta UTCH
-                    </span>
-                </div>
+        <div class="navbar-inner">
+            <div class="flex items-center gap-3">
+                <img src="../static/logo_proyecta.png" alt="UTCH Proyecta" class="h-7 w-auto cursor-pointer">
+                <span class="text-white text-base font-semibold tracking-wide hidden md:block">Proyecta UTCH</span>
             </div>
+            <a href="landing_page.html" class="text-gray-300 hover:text-white text-sm transition-colors duration-200">
+                ← Volver
+            </a>
         </div>
     </nav>
 
-    <!-- Login Section -->
-    <main class="flex flex-1 items-center justify-center">
+    <!-- ===== LOGIN FORM ===== -->
+    <main>
+        <div class="login-card">
 
-        <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-
-            <!-- Header -->
+            <!-- Logo + Title -->
             <div class="text-center mb-6">
-                <h1 class="text-3xl font-bold">Bienvenido</h1>
-                <p class="text-gray-500 mt-2">Inicia sesión para continuar</p>
+                <img src="../static/logo_proyecta.png" alt="Proyecta" class="h-12 w-auto mx-auto mb-3 opacity-90">
+                <h1 class="login-title">Bienvenido</h1>
+                <p class="login-subtitle">Inicia sesión para continuar en Proyecta</p>
             </div>
 
             <!-- Form -->
-            <form class="space-y-5">
+            <form class="space-y-4" onsubmit="return false;">
 
                 <!-- Email -->
                 <div>
-                    <label class="label">
-                        <span class="label-text font-medium">Correo electrónico</span>
-                    </label>
-                    <input type="email" placeholder="ejemplo@correo.com"
-                        class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-green-500" />
+                    <label for="login-email" class="form-label">Correo electrónico</label>
+                    <input id="login-email" type="email" placeholder="ejemplo@correo.com" class="form-input"
+                        autocomplete="email" />
                 </div>
 
                 <!-- Password -->
                 <div>
-                    <label class="label">
-                        <span class="label-text font-medium">Contraseña</span>
-                    </label>
-                    <input type="password" placeholder="********"
-                        class="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-green-500" />
+                    <label for="login-password" class="form-label">Contraseña</label>
+                    <div style="position:relative;">
+                        <input id="login-password" type="password" placeholder="••••••••" class="form-input"
+                            autocomplete="current-password" style="padding-right:2.75rem;" />
+                        <!-- Toggle visibility -->
+                        <button type="button" onclick="togglePassword()"
+                            style="position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;"
+                            title="Mostrar/ocultar contraseña">
+                            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.8" stroke="currentColor" style="width:18px;height:18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Remember + Forgot -->
-                <div class="flex justify-between items-center text-sm">
-                    <label class="cursor-pointer flex items-center gap-2">
+                <div class="flex items-center justify-between">
+                    <label class="checkbox-label">
                         <input type="checkbox" class="checkbox checkbox-success checkbox-sm" />
                         <span>Recordarme</span>
                     </label>
-
-                    <a href="#" class="text-light-green hover:underline">
-                        ¿Olvidaste tu contraseña?
-                    </a>
+                    <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
                 </div>
 
-                <!-- Button -->
-                <button type="submit"
-                    class="w-full bg-light-green hover:bg-green-500 text-white font-semibold py-2 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
-                    Iniciar Sesión
-                </button>
+                <!-- Submit -->
+                <div style="padding-top:0.5rem;">
+                    <button type="submit" class="login-btn" onclick="window.location.href='index.html'">
+                        Iniciar Sesión
+                    </button>
+                </div>
+
             </form>
 
             <!-- Footer -->
-            <div class="text-center mt-6 text-sm text-gray-500">
-                © 2026 Proyecta Vehicular
+            <div class="text-center mt-6 text-xs text-gray-400">
+                © 2026 Proyecta UTCH &mdash; Universidad Tecnológica de Chihuahua
             </div>
 
         </div>
-
     </main>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('login-password');
+            const isPass = input.type === 'password';
+            input.type = isPass ? 'text' : 'password';
+        }
+    </script>
 
 </body>
 
